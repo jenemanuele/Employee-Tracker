@@ -1,7 +1,6 @@
 const { prompt } = require('inquirer');
-const db = require('./db/connection');
-const mysql = require("mysql");
-const cTable = require('console.table');
+// const db = require('./db/connection');
+const mysql = require('mysql2');
 
 
 prompt([
@@ -12,29 +11,29 @@ prompt([
         choices: ['view all departments', 'view all roles', 'view all employees', 'add a department',' add a role', 'add an employee', 'update an employee role']
     }
 ]).then(choice => {
-    switch (choice) {
-        case 'View all departments':
+    console.log('choice selected! :', choice.options);
+    switch (choice.options) {
+        case 'view all departments':
             viewDepartments();
             break;
-        case 'View all roles':
+        case 'view all roles':
             viewRoles();
             break;
-        case 'View all employees':
+        case 'view all employees':
             viewEmployees();
             break;
-        case 'Add a department':
+        case 'add a department':
             addDepartment();
             break;
-        case 'Add a roles':
+        case 'add a roles':
             addRole();
             break;
-        case 'Add an employee':
+        case 'add an employee':
             addEmployee();
             break;
-        case 'Update an employee role':
+        case 'update an employee role':
             updateRole();
             break;
-    
     }
 });
 
@@ -44,18 +43,19 @@ viewDepartments =>  {
     db.query(sql, (error, response) => {
         if (error) throw error;
         console.table(response);
-        employeeTracker();
+        viewDepartments();
     })
 }
 
-viewRoles  => {
+const viewRoles = () => {
+    console.log("HELLO!");
     const sql = `SELECT role.id, role.title, role.salary, name.department AS department FROM role
     INNER JOIN department ON role.department_id = department.id`;
 
     db.query(sql, (error, response) => {
         if (error) throw error;
         console.table(response);
-        viewEmployees();
+        // viewEmployees();
     })
 }
 
