@@ -120,12 +120,6 @@ const addRole = () => {
 const addEmployee = () => {
     prompt([
         {
-            type: 'list',
-            name: 'employeeId',
-            message: 'What is the employee id?',
-            choices: [1, 2, 3, 4, 5]
-        },        
-        {
             name: 'firstName',
             type: 'input',
             message: "What is the employee's first name?"
@@ -148,7 +142,7 @@ const addEmployee = () => {
             choices: [1, 2, 3]
         }
     ]).then((answer) => {
-        const sql =`INSERT INTO employee (id, first_name, last_name, role_id, manager_id) VALUES ("${answer.employeeId}", "${answer.firstName}", "${answer.lastName}", "${answer.roleId}", "${answer.managerId}"`;
+        const sql =`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES  ("${answer.firstName}", "${answer.lastName}", "${answer.roleId}", "${answer.managerId}")`;
 
         db.query(sql, (error, response) => {
             if (error) throw error;
@@ -158,26 +152,26 @@ const addEmployee = () => {
     });
 };
 
-// const updateEmployee = () => {
-//     prompt([
-//         {
-//             type: 'options',
-//             name: 'previousId',
-//             message: 'What is the current employee role id?',
-//             choices: '1, 2, 3, 4, 5, 6'
-//         }
-//         {
-//             type: 'options',
-//             name: 'updateRole',
-//             message: 'What is the new role id (number) of the employee?',
-//              choices: '1, 2, 3, 4, 5'
-//         }
-//     ]).then((answer) => {
-//         const sql='SELECT first_name, last_name, role_id FROM employee WHERE ';
+const updateRole = () => {
+    prompt([
+        {
+            type: 'list',
+            name: 'employeeId',
+            message: 'What is the current employee id?',
+            choices: [1, 2, 3, 4, 5, 6]
+        },
+        {
+            type: 'list',
+            name: 'newRoleId',
+            message: 'What is the new role id (number) of the employee?',
+             choices: [1, 2, 3, 4, 5]
+        }
+    ]).then((answer) => {
+        const sql= `UPDATE employee SET role_id= "${answer.newRoleId}" WHERE "${answer.employeeId}"` ;
 
-//         db.query(sql, (error, response) => {
-//             if (error) throw error;
-//             console.log(answer.updateRole + ' role updated in employee database!')
-//         })
-//     })
-// }
+        db.query(sql, (error, response) => {
+            if (error) throw error;
+            console.log('Role updated in employee database!')
+        })
+    })
+}
