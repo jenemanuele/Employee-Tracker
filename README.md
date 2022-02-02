@@ -31,7 +31,8 @@
   [jenemanuele](https://github.com/jenemanuele) 
   or jemanuele@gmail.com
   #  💜 Screenshot 💜 
-  ![image](https://user-images.githubusercontent.com/91485484/152169252-c2f6ae07-534e-4e03-b089-8dbee5fa5e91.png)
+  ![image](https://user-images.githubusercontent.com/91485484/152169696-d3088899-2866-4124-bc91-fd85da5d5047.png)
+
 
   # 📹 Video 📹
   
